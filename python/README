@@ -1,0 +1,2 @@
+docker build -t asl-python ./python
+docker run --rm asl-python

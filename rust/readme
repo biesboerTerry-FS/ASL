@@ -1,0 +1,5 @@
+docker build -t asl-rust-manual ./rust
+docker run -d --name rust-box asl-rust
+docker exec -it rust-box /bin/bash
+cargo build
+cargo run
