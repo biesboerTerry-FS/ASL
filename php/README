@@ -1,1 +1,7 @@
-docker run --rm -v "$PWD":/app -w /app php:8.2-cli php index.php
+docker build -t asl-php ./php
+docker run -d --name php-box asl-php
+docker exec -it php-box /bin/sh
+
+# inside php directory
+
+php index.php

@@ -1,3 +1,7 @@
-## from nodejs folder
+docker build -t asl-node ./nodejs
+docker run -d --name node-box asl-node
+docker exec -it node-box /bin/sh
 
-docker run --rm -v "$PWD":/app -w /app node:lts-alpine node app.js
+<!-- inside nodejs directory -->
+
+node app.js
