@@ -2,14 +2,12 @@ module.exports = (
 	app,
 	{ ContactModel, Pager, sortContacts, filterContacts, handleErrors },
 ) => {
-	// GET /contacts
 	app.get("/contacts", (req, res) => {
 		try {
 			const filterBy = req.get("X-Filter-By");
 			const operator = req.get("X-Filter-Operator");
 			const value = req.get("X-Filter-Value");
 
-			// Always get fresh data from the model
 			let result = ContactModel.index();
 
 			if (filterBy && operator && value) {
@@ -18,7 +16,6 @@ module.exports = (
 
 			const { sort, direction } = req.query;
 			if (sort) {
-				// sortContacts signature is: (direction, field, collection)
 				result = sortContacts(direction || "asc", sort, result);
 			}
 
@@ -27,7 +24,6 @@ module.exports = (
 
 			const pager = new Pager(result, page, limit);
 
-			// pager.total is a property, not a method
 			res.set("X-Results-Total", pager.total);
 			res.set("X-Page-Next", pager.next());
 			res.set("X-Page-Prev", pager.prev());
@@ -38,7 +34,6 @@ module.exports = (
 		}
 	});
 
-	// GET /contacts/:id
 	app.get("/contacts/:id", (req, res) => {
 		try {
 			res.json(ContactModel.show(req.params.id));
@@ -47,7 +42,6 @@ module.exports = (
 		}
 	});
 
-	// POST /contacts
 	app.post("/contacts", (req, res) => {
 		try {
 			const newContact = ContactModel.create(req.body);
@@ -57,7 +51,6 @@ module.exports = (
 		}
 	});
 
-	// PUT /contacts/:id
 	app.put("/contacts/:id", (req, res) => {
 		try {
 			ContactModel.update(req.params.id, req.body);
@@ -67,7 +60,6 @@ module.exports = (
 		}
 	});
 
-	// DELETE /contacts/:id
 	app.delete("/contacts/:id", (req, res) => {
 		try {
 			ContactModel.remove(req.params.id);

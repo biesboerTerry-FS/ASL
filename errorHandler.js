@@ -1,7 +1,6 @@
-const { ContactResourceError } = require("@jworkman-fs/asl"); // <--- Add this import
+const { ContactResourceError } = require("@jworkman-fs/asl");
 
 const handleErrors = (e, res) => {
-	// Logging the error is helpful for debugging during the deadline
 	console.error("Error Caught:", e.name, e.message);
 
 	switch (e.name) {
